@@ -1,5 +1,7 @@
-package com.mairuis.concurrent;
+package com.mairuis.concurrent.problem;
 
+
+import com.mairuis.concurrent.util.Threads;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,6 +15,20 @@ import java.util.stream.IntStream;
  * @since 2020/5/3
  */
 public abstract class DiningPhilosophers {
+
+    public static void main(String[] args) throws InterruptedException {
+        DiningPhilosophers diningPhilosophers = new CASImplementSolution();
+        long time = System.currentTimeMillis();
+        Threads.start(100, (i) -> {
+            int N = 100000;
+            while (N > 0) {
+                diningPhilosophers.eat(i % 5);
+                N -= 1;
+            }
+        }).join();
+        long passTime = System.currentTimeMillis() - time;
+        System.out.println("success " + diningPhilosophers.count() + " 耗时 " + passTime + "ms");
+    }
 
     public abstract void eat(int philosophers);
 
@@ -48,19 +64,5 @@ public abstract class DiningPhilosophers {
         public int count() {
             return eatCount.get();
         }
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        DiningPhilosophers diningPhilosophers = new CASImplementSolution();
-        long time = System.currentTimeMillis();
-        Threads.start(100, (i) -> {
-            int N = 100000;
-            while (N > 0) {
-                diningPhilosophers.eat(i % 5);
-                N -= 1;
-            }
-        }).join();
-        long passTime = System.currentTimeMillis() - time;
-        System.out.println("success " + diningPhilosophers.count() + " 耗时 " + passTime + "ms");
     }
 }

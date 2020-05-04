@@ -1,6 +1,5 @@
-package com.mairuis.concurrent;
+package com.mairuis.concurrent.util;
 
-import java.util.function.Function;
 import java.util.function.IntConsumer;
 
 /**
@@ -22,13 +21,13 @@ public class Threads {
         }
     }
 
+    public static Threads start(int n, IntConsumer runnable) {
+        return new Threads(n, runnable);
+    }
+
     public void join() throws InterruptedException {
         for (Thread thread : threads) {
             thread.join();
         }
-    }
-
-    public static Threads start(int n, IntConsumer runnable) {
-        return new Threads(n, runnable);
     }
 }
