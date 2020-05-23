@@ -6,5 +6,6 @@ package com.mairuis.opersystem;
  * @author Mairuis
  * @since 2020/5/5
  */
-public class FIFOShcheduler {
+public class FIFOScheduler {
+
 }
