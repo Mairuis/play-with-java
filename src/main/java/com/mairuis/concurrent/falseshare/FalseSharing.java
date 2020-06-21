@@ -83,7 +83,8 @@ public final class FalseSharing implements Runnable {
 
 
     public final static class VolatileInt {
-        @jdk.internal.vm.annotation.Contended("tlr")
+        //新版JDK不让玩了 ？？？ 啧啧
+//        @jdk.internal.vm.annotation.Contended("tlr")
         public volatile int value = 0;
     }
 }
