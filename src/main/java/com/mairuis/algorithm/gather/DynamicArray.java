@@ -69,7 +69,7 @@ public class DynamicArray<V> implements Iterable<V> {
 
     private void resize(int newCap) {
         Object[] newArray = new Object[newCap];
-        int copySize = newCap > size ? size : newCap;
+        int copySize = Math.min(newCap, size);
         System.arraycopy(array, 0, newArray, 0, copySize);
         this.array = newArray;
     }
