@@ -22,10 +22,11 @@ public class ConfigPublisher {
     }
 
     public void publish(ConfigData configData) throws Exception {
-        if (this.getClient().checkExists().forPath(getPath()) == null) {
-            this.getClient().create().creatingParentContainersIfNeeded().forPath(path, configData.serialize());
+        CuratorFramework client = this.getClient();
+        if (client.checkExists().forPath(getPath()) == null) {
+            client.create().creatingParentContainersIfNeeded().forPath(path, configData.serialize());
         } else {
-            this.getClient().setData().forPath(path, configData.serialize());
+            client.setData().forPath(path, configData.serialize());
         }
     }
 
