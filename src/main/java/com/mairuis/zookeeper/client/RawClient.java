@@ -7,12 +7,14 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.CountDownLatch;
 
 /**
+ * 原生客户端连接小demo
+ *
  * @author Mairuis
  * @since 2020/6/21
  */
-public class ZooKeeperDemo implements Watcher {
+public class RawClient implements Watcher {
 
-    private CountDownLatch countDownLatch = new CountDownLatch(1);
+    private final CountDownLatch countDownLatch = new CountDownLatch(1);
 
     @Override
     public void process(WatchedEvent watchedEvent) {
@@ -24,7 +26,7 @@ public class ZooKeeperDemo implements Watcher {
 
 
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
-        ZooKeeperDemo watcher = new ZooKeeperDemo();
+        RawClient watcher = new RawClient();
         try (ZooKeeper zooKeeper = new ZooKeeper("localhost:2181"
                 , 1000
                 , watcher)) {

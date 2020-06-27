@@ -1,4 +1,4 @@
-package com.mairuis.zookeeper.client;
+package com.mairuis.zookeeper.dl;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
