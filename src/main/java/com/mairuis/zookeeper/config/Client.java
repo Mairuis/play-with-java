@@ -27,12 +27,9 @@ public class Client {
             final byte[] bytes = getClient().getData().usingWatcher(getUpdateWatcher()).forPath(event.getPath());
             final ConfigData old = getConfigData();
             setConfigData(ConfigData.deserialize(bytes));
-            LOGGER.info("发生更新事件 " + old + " -> " + configData);
+            log.info("发生更新事件 " + old + " -> " + configData);
         }
     };
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(PlayConfig.class);
-
 
     public Client(String path, CuratorFramework client) {
         this.path = path;
@@ -44,6 +41,6 @@ public class Client {
 
         final byte[] bytes = getClient().getData().usingWatcher(getUpdateWatcher()).forPath(getPath());
         this.setConfigData(ConfigData.deserialize(bytes));
-        LOGGER.info("初始化配置 " + configData);
+        log.info("初始化配置 " + configData);
     }
 }
