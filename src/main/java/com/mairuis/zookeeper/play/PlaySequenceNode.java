@@ -42,8 +42,11 @@ public class PlaySequenceNode {
     }
 
     public void createNode() throws Exception {
-        final String node = this.getClient().create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath(getContainer() + getNode());
-        LOGGER.info("增加节点 {}", node);
+        createNode(getNode());
+    }
+
+    public void createNode(String path) throws Exception {
+        LOGGER.info("增加节点 {}", this.getClient().create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath(getContainer() + path));
     }
 
     public void play() throws Exception {
@@ -54,6 +57,7 @@ public class PlaySequenceNode {
 
         this.createNode();
         this.createNode();
+        this.createNode("/specialNode");
         this.createNode();
         synchronized (this.getClient()) {
             this.getClient().close();
