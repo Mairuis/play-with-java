@@ -1,4 +1,4 @@
-package com.mairuis.zookeeper.play;
+package com.mairuis.zookeeper.gizmos.play;
 
 import lombok.Getter;
 import lombok.extern.java.Log;

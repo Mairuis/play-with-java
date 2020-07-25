@@ -1,4 +1,4 @@
-package com.mairuis.zookeeper.config;
+package com.mairuis.zookeeper.gizmos.config;
 
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;

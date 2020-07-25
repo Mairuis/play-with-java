@@ -1,4 +1,4 @@
-package com.mairuis.zookeeper.config;
+package com.mairuis.zookeeper.gizmos.config;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -7,8 +7,6 @@ import lombok.extern.java.Log;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.api.CuratorWatcher;
 import org.apache.zookeeper.Watcher;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Mairuis

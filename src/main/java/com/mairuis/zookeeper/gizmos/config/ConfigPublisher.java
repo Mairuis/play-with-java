@@ -1,4 +1,4 @@
-package com.mairuis.zookeeper.config;
+package com.mairuis.zookeeper.gizmos.config;
 
 import lombok.Getter;
 import org.apache.curator.framework.CuratorFramework;

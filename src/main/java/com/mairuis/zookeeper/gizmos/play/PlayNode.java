@@ -1,4 +1,4 @@
-package com.mairuis.zookeeper.play;
+package com.mairuis.zookeeper.gizmos.play;
 
 import lombok.extern.java.Log;
 import org.apache.curator.framework.CuratorFrameworkFactory;

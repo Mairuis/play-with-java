@@ -1,4 +1,4 @@
-package com.mairuis.zookeeper.config;
+package com.mairuis.zookeeper.gizmos.config;
 
 import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;
