@@ -1,4 +1,4 @@
-package com.mairuis.zookeeper.gizmos.client;
+package com.mairuis.zookeeper.client;
 
 import org.apache.zookeeper.*;
 

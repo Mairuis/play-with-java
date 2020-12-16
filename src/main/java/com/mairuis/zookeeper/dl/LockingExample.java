@@ -1,4 +1,4 @@
-package com.mairuis.zookeeper.gizmos.dl;
+package com.mairuis.zookeeper.dl;
 
 import locking.ExampleClientThatLocks;
 import locking.FakeLimitedResource;
