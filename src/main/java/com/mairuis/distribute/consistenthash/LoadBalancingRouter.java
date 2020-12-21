@@ -8,7 +8,7 @@ public interface LoadBalancingRouter {
 
     Node put(Node node);
 
-    boolean remove(String id);
+    Node remove(String id);
 
     Node route(String key);
 
