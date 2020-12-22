@@ -11,8 +11,14 @@ public interface Node {
     /**
      * get the unique id of this node
      *
-     * @return
+     * @return unique id
      */
     String getUniqueId();
 
+    /**
+     * test it is available
+     *
+     * @return return true if available
+     */
+    boolean isAvailable();
 }
