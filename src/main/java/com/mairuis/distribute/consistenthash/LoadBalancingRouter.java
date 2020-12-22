@@ -4,12 +4,12 @@ package com.mairuis.distribute.consistenthash;
  * @author Mairuis
  * @since 2020/12/20
  */
-public interface LoadBalancingRouter {
+public interface LoadBalancingRouter<T extends Node> extends Iterable<T> {
 
-    Node put(Node node);
+    T put(T node);
 
-    Node remove(String id);
+    T remove(String id);
 
-    Node route(String key);
+    T route(String key);
 
 }

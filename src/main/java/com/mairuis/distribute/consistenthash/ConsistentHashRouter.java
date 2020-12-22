@@ -2,41 +2,53 @@ package com.mairuis.distribute.consistenthash;
 
 import com.mairuis.algorithm.hash.HashFunc;
 import com.mairuis.algorithm.hash.MurmurHash3;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.ConcurrentNavigableMap;
+import java.util.Iterator;
+import java.util.NavigableMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * @author Mairuis
  * @since 2020/12/20
  */
-public class ConsistentHashRouter implements LoadBalancingRouter {
-
+public class ConsistentHashRouter<T extends Node> implements LoadBalancingRouter<T> {
+    private final int virtualNode;
     private final HashFunc<String> hashFunc;
-    private final ConcurrentNavigableMap<Integer, Node> hashRing;
+    private final NavigableMap<Integer, T> ring;
 
     public ConsistentHashRouter() {
-        this(new MurmurHash3());
+        this(new MurmurHash3(), 20);
     }
 
-    public ConsistentHashRouter(HashFunc<String> hashFunc) {
+    public ConsistentHashRouter(HashFunc<String> hashFunc, int virtualNode) {
         this.hashFunc = hashFunc;
-        this.hashRing = new ConcurrentSkipListMap<>();
+        this.virtualNode = virtualNode;
+        this.ring = new ConcurrentSkipListMap<>();
     }
 
     @Override
-    public Node put(Node node) {
-        return this.hashRing.put(hashFunc.hash(node.getUniqueId()), node);
+    public T put(T node) {
+        return this.ring.put(hashFunc.hash(node.getUniqueId()), node);
     }
 
     @Override
-    public Node remove(String id) {
-        return this.hashRing.remove(hashFunc.hash(id));
+    public T remove(String id) {
+        return this.ring.remove(hashFunc.hash(id));
     }
 
     @Override
-    public Node route(String key) {
-        Integer floorKey = this.hashRing.floorKey(hashFunc.hash(key));
-        return this.hashRing.get(floorKey);
+    public T route(String id) {
+        Integer key = this.ring.ceilingKey(hashFunc.hash(id));
+        if (key == null) {
+            key = this.ring.firstKey();
+        }
+        return this.ring.get(key);
+    }
+
+    @NotNull
+    @Override
+    public Iterator<T> iterator() {
+        return this.ring.values().iterator();
     }
 }
