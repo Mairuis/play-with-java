@@ -5,6 +5,7 @@ import com.mairuis.distribute.consistenthash.Node;
 import lombok.Data;
 import org.junit.Test;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -26,7 +27,7 @@ public class TestConsistentHashRouter {
         router.put(new ServiceNode("10.1.1.8"));
 
         for (int i = 0; i < 100000000; i++) {
-            router.route(String.valueOf(i)).service();
+            router.route(String.valueOf(ThreadLocalRandom.current().nextInt(Integer.MAX_VALUE))).service();
         }
 
         for (ServiceNode serviceNode : router) {
