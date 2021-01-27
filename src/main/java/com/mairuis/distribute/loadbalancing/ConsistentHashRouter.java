@@ -1,8 +1,7 @@
-package com.mairuis.distribute.consistenthash;
+package com.mairuis.distribute.loadbalancing;
 
 import com.mairuis.algorithm.hash.HashFunc;
 import com.mairuis.algorithm.hash.MurmurHash3;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -94,7 +93,6 @@ public class ConsistentHashRouter<T extends Node> implements LoadBalancingRouter
         return node == null ? null : node.getNode();
     }
 
-    @NotNull
     @Override
     public Iterator<T> iterator() {
         return this.realNodes.values().stream().map(RingNode::getNode).iterator();

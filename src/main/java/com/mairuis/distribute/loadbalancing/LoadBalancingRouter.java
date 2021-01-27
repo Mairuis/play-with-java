@@ -1,4 +1,4 @@
-package com.mairuis.distribute.consistenthash;
+package com.mairuis.distribute.loadbalancing;
 
 /**
  * load-balancing router

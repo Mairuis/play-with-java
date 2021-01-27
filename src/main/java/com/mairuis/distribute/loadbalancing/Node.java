@@ -1,4 +1,4 @@
-package com.mairuis.distribute.consistenthash;
+package com.mairuis.distribute.loadbalancing;
 
 /**
  * the node at practice indicates a machine in quorum, or application instance.
