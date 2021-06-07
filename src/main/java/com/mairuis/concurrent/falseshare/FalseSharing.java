@@ -30,13 +30,13 @@ package com.mairuis.concurrent.falseshare;
  * @date 2019/7/26
  */
 public final class FalseSharing implements Runnable {
-    public final static int NUM_THREADS = 4;
-    public final static int ITERATIONS = 500 * 1000 * 1000;
-    private static VolatileInt[] longs = new VolatileInt[NUM_THREADS];
+    public final static int NUM_THREADS = 8;
+    public final static int ITERATIONS = 1024 * 1024;
+    private static VolatileLong[] longs = new VolatileLong[NUM_THREADS];
 
     static {
         for (int i = 0; i < longs.length; i++) {
-            longs[i] = new VolatileInt();
+            longs[i] = new VolatileLong();
         }
     }
 
@@ -47,7 +47,7 @@ public final class FalseSharing implements Runnable {
     }
 
     public static void main(final String[] args) throws Exception {
-        final long start = System.nanoTime();
+        final long start = System.currentTimeMillis();
         Thread[] threads = new Thread[NUM_THREADS];
 
         for (int i = 0; i < threads.length; i++) {
@@ -61,7 +61,7 @@ public final class FalseSharing implements Runnable {
         for (Thread t : threads) {
             t.join();
         }
-        System.out.println("duration = " + (System.nanoTime() - start));
+        System.out.println("duration = " + (System.currentTimeMillis() - start));
     }
 
     @Override
@@ -72,13 +72,17 @@ public final class FalseSharing implements Runnable {
         }
     }
 
+    /**
+     * 并不能完美保证不发生伪共享
+     * 因为缓存行可能从任意一个位置开始
+     */
     public final static class VolatileLong {
         //填充64字节的前56个
-        public long a1, a2, a3, a4, a5, a6, a7;
+        protected long p1, p2, p3, p4, p5, p6, p7;
         //填充缓存行最后一个
-        public volatile long value = 0L;
+        public volatile long value;
         //填充 value所在的缓存行
-        public long p1, p2, p3, p4, p5, p6;
+        protected long p9, p10, p11, p12, p13, p14, p15;
     }
 
 
