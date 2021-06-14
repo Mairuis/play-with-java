@@ -15,16 +15,14 @@ public class Visibility {
     static volatile boolean running = true;
 
     public static void main(String[] args) {
-        Thread t1 = new Thread(() -> {
+        new Thread(() -> {
             int counter = 0;
             while (running) {
                 counter++;
             }
             System.out.println("Thread 1 finished. Counted up to " + counter);
-        });
-        t1.setDaemon(false);
-        t1.start();
-        Thread t2 = new Thread(() -> {
+        }).start();
+        new Thread(() -> {
             //睡眠确保thread1大概率先被调度
             try {
                 Thread.sleep(100);
@@ -32,9 +30,7 @@ public class Visibility {
             }
             System.out.println("Thread 2 finishing");
             running = false;
-        });
-        t2.setDaemon(false);
-        t2.start();
+        }).start();
 
         while (true) {
             try {
