@@ -1,7 +1,7 @@
 package loadbalancing;
 
-import com.mairuis.distribute.consistenthash.ConsistentHashRouter;
-import com.mairuis.distribute.consistenthash.Node;
+import com.mairuis.distribute.loadbalancing.ConsistentHashRouter;
+import com.mairuis.distribute.loadbalancing.Node;
 import lombok.Data;
 import org.junit.Test;
 
