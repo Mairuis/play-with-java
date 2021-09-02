@@ -19,6 +19,6 @@ public class LiteralExpression implements RegularExpression {
 
     @Override
     public <T> T Accept(RegularExpressionConverter<T> visitor) {
-        return visitor.ConvertLiteral(this);
+        return visitor.convertLiteral(this);
     }
 }

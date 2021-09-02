@@ -12,6 +12,10 @@ public class IterationExpression implements RegularExpression {
         this.innerExpression = innerExpression;
     }
 
+    public RegularExpression getInnerExpression() {
+        return innerExpression;
+    }
+
     @Override
     public String toString() {
         return innerExpression.toString() + "*";
@@ -19,6 +23,6 @@ public class IterationExpression implements RegularExpression {
 
     @Override
     public <T> T Accept(RegularExpressionConverter<T> visitor) {
-        return visitor.ConvertIteration(this);
+        return visitor.convertIteration(this);
     }
 }

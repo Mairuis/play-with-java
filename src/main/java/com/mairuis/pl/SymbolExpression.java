@@ -12,6 +12,10 @@ public class SymbolExpression implements RegularExpression {
         this.character = character;
     }
 
+    public char getCharacter() {
+        return character;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(character);
@@ -19,6 +23,6 @@ public class SymbolExpression implements RegularExpression {
 
     @Override
     public <T> T Accept(RegularExpressionConverter<T> visitor) {
-        return visitor.ConvertSymbol(this);
+        return visitor.convertSymbol(this);
     }
 }

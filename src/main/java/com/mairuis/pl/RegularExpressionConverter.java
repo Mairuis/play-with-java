@@ -6,14 +6,18 @@ package com.mairuis.pl;
  */
 public interface RegularExpressionConverter<T> {
 
-    T ConvertConcatenation(ConcatenationExpression expression);
+    default T convert(RegularExpression expression) {
+        return expression.Accept(this);
+    }
 
-    T ConvertIteration(IterationExpression iterationExpression);
+    T convertConcatenation(ConcatenationExpression expression);
 
-    T ConvertLiteral(LiteralExpression literalExpression);
+    T convertIteration(IterationExpression iterationExpression);
 
-    T ConvertSymbol(SymbolExpression symbolExpression);
+    T convertLiteral(LiteralExpression literalExpression);
 
-    T ConvertUnion(UnionExpression unionExpression);
-    
+    T convertSymbol(SymbolExpression symbolExpression);
+
+    T convertUnion(UnionExpression unionExpression);
+
 }

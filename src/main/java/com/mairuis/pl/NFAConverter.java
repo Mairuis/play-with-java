@@ -7,27 +7,31 @@ package com.mairuis.pl;
 public class NFAConverter implements RegularExpressionConverter<NFAModel> {
 
     @Override
-    public NFAModel ConvertConcatenation(ConcatenationExpression expression) {
+    public NFAModel convertConcatenation(ConcatenationExpression expression) {
         return null;
     }
 
     @Override
-    public NFAModel ConvertIteration(IterationExpression iterationExpression) {
+    public NFAModel convertIteration(IterationExpression iterationExpression) {
+        final NFAModel innerNfaModel = convert(iterationExpression.getInnerExpression());
+        return innerNfaModel;
+    }
+
+    @Override
+    public NFAModel convertLiteral(LiteralExpression literalExpression) {
         return null;
     }
 
     @Override
-    public NFAModel ConvertLiteral(LiteralExpression literalExpression) {
-        return null;
+    public NFAModel convertSymbol(SymbolExpression symbolExpression) {
+        final char character = symbolExpression.getCharacter();
+        final NFAState tailState = NFAState.create();
+        final NFAEdge entryEdge = NFAEdge.create(character, tailState);
+        return NFAModel.create(entryEdge, tailState);
     }
 
     @Override
-    public NFAModel ConvertSymbol(SymbolExpression symbolExpression) {
-        return null;
-    }
-
-    @Override
-    public NFAModel ConvertUnion(UnionExpression unionExpression) {
+    public NFAModel convertUnion(UnionExpression unionExpression) {
         return null;
     }
 }

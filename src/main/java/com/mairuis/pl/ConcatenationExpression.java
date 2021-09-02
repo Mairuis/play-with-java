@@ -21,6 +21,6 @@ public class ConcatenationExpression implements RegularExpression {
 
     @Override
     public <T> T Accept(RegularExpressionConverter<T> visitor) {
-        return visitor.ConvertConcatenation(this);
+        return visitor.convertConcatenation(this);
     }
 }

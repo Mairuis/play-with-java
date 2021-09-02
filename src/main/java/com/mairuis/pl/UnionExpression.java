@@ -21,6 +21,6 @@ public class UnionExpression implements RegularExpression {
 
     @Override
     public <T> T Accept(RegularExpressionConverter<T> visitor) {
-        return visitor.ConvertUnion(this);
+        return visitor.convertUnion(this);
     }
 }
