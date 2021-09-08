@@ -38,4 +38,10 @@ public final class RegExp {
         return new IterationExpression(expression);
     }
 
+    public static void main(String[] args) {
+        final RegularExpression expression = iteration(concatenation(symbol('a'), symbol('b')));
+        final NFAConverter nfaConverter = new NFAConverter();
+        final NFAModel model = nfaConverter.convert(expression);
+        System.out.println(model.toString());
+    }
 }

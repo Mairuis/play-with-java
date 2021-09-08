@@ -11,12 +11,16 @@ public class NFAState {
 
     private final List<NFAEdge> outEdges = new ArrayList<>();
 
-    public static NFAState create() {
-        return new NFAState();
-    }
-
     public void addEdge(NFAEdge edge) {
         outEdges.add(edge);
+    }
+
+    public List<NFAEdge> getOutEdges() {
+        return outEdges;
+    }
+
+    public static NFAState create() {
+        return new NFAState();
     }
 
 }

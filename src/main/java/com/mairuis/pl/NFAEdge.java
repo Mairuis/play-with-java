@@ -18,7 +18,16 @@ public class NFAEdge {
         this.state = state;
     }
 
+    public char getCharacter() {
+        return character;
+    }
+
+    public NFAState getState() {
+        return state;
+    }
+
     public static NFAEdge create(char character, NFAState state) {
         return new NFAEdge(character, state);
     }
+
 }

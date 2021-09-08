@@ -1,7 +1,5 @@
 package com.mairuis;
 
-import com.mairuis.algorithm.analysis.Watch;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
@@ -19,8 +17,8 @@ public class DiskTest {
     public static void main(String[] args) throws IOException {
         FileChannel open = FileChannel.open(Paths.get("E:/test-file"),StandardOpenOption.READ,StandardOpenOption.WRITE);
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(1024 * 1024 * 1024);
-        Watch watch = new Watch();
-        watch.begin();
+//        Watch watch = new Watch();
+//        watch.begin();
 //        for (int i = 0; i < 1024; i++) {
 //            open.write(byteBuffer);
 //            open.force(false);
@@ -30,6 +28,6 @@ public class DiskTest {
         for (int i = 0; i < 1024; i++) {
             map.put(byteBuffer);
         }
-        System.out.println(watch.end());
+//        System.out.println(watch.end());
     }
 }

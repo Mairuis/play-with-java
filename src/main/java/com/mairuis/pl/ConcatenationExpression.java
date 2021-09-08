@@ -14,6 +14,14 @@ public class ConcatenationExpression implements RegularExpression {
         this.right = right;
     }
 
+    public RegularExpression getLeft() {
+        return left;
+    }
+
+    public RegularExpression getRight() {
+        return right;
+    }
+
     @Override
     public String toString() {
         return left.toString() + right.toString();
