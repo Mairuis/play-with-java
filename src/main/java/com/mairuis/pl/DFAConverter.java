@@ -1,9 +1,6 @@
 package com.mairuis.pl;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 子集构造算法实现 (subset construction)
@@ -12,38 +9,18 @@ import java.util.Set;
  * @author Mairuis
  * @since 2021/9/22
  */
-public class DFAConverter implements RegularExpressionConverter<DFAModel> {
-    @Override
-    public DFAModel convertConcatenation(ConcatenationExpression expression) {
-        return null;
-    }
-
-    @Override
-    public DFAModel convertIteration(IterationExpression iterationExpression) {
-        return null;
-    }
-
-    @Override
-    public DFAModel convertLiteral(LiteralExpression literalExpression) {
-        return null;
-    }
-
-    @Override
-    public DFAModel convertSymbol(SymbolExpression symbolExpression) {
-        return null;
-    }
-
-    @Override
-    public DFAModel convertUnion(UnionExpression unionExpression) {
-        return null;
-    }
+public class DFAConverter {
 
     private Set<NFAState> reachable(Set<NFAState> states, char character) {
-        final Queue<NFAState> searchQueue = new LinkedList<>(states);
-        while (!searchQueue.isEmpty()) {
-            final NFAState state = searchQueue.poll();
-            
+        final Set<NFAState> reachableSet = new HashSet<>();
+        for (NFAState state : states) {
+            for (NFAEdge outEdge : state.getOutEdges()) {
+                if (outEdge.getCharacter() == character) {
+                    reachableSet.add(outEdge.getState());
+                }
+            }
         }
+        return reachableSet;
     }
 
     private Set<NFAState> epsilonClosure(Set<NFAState> states) {
