@@ -26,12 +26,8 @@ public final class RegExp {
         return expression;
     }
 
-    public static RegularExpression literal(String literal) {
-        return new LiteralExpression(literal);
-    }
-
-    public static RegularExpression union(char... chars) {
-        return new UnionExpression(chars);
+    public static RegularExpression union(RegularExpression... expressions) {
+        return new UnionExpression(expressions);
     }
 
     public static RegularExpression iteration(RegularExpression expression) {
@@ -39,9 +35,11 @@ public final class RegExp {
     }
 
     public static void main(String[] args) {
-        final RegularExpression expression = iteration(concatenation(symbol('a'), symbol('b')));
+        final RegularExpression expression = union(iteration(concatenation(symbol('a'), symbol('b'))), symbol('a'));
         final NFAConverter nfaConverter = new NFAConverter();
         final NFAModel model = nfaConverter.convert(expression);
+        final DFAModel dfaModel = DFAConverter.convert(model);
+
         System.out.println(model.toString());
     }
 }

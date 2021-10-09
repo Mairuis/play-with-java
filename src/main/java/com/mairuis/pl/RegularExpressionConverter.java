@@ -14,8 +14,6 @@ public interface RegularExpressionConverter<T> {
 
     T convertIteration(IterationExpression iterationExpression);
 
-    T convertLiteral(LiteralExpression literalExpression);
-
     T convertSymbol(SymbolExpression symbolExpression);
 
     T convertUnion(UnionExpression unionExpression);

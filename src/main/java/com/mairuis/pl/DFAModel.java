@@ -1,6 +1,6 @@
 package com.mairuis.pl;
 
-import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * @author Mairuis
@@ -8,5 +8,13 @@ import java.util.Hashtable;
  */
 public class DFAModel {
 
+    private final Map<NFASet, Map<Character, NFASet>> dfaTable;
 
+    public DFAModel(Map<NFASet, Map<Character, NFASet>> dfaTable) {
+        this.dfaTable = dfaTable;
+    }
+
+    public Map<NFASet, Map<Character, NFASet>> getDfaTable() {
+        return dfaTable;
+    }
 }

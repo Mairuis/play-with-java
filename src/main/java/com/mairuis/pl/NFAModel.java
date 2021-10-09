@@ -6,11 +6,17 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 汤普森构造法实现非确定状态机
+ *
  * @author Mairuis
  * @since 2021/9/9
  */
 public class NFAModel {
 
+    /**
+     * 入边
+     * 永远为 epsilon 边
+     */
     private final NFAEdge entryEdge;
 
     private final NFAState tailState;
@@ -20,16 +26,33 @@ public class NFAModel {
         this.tailState = tailState;
     }
 
-    public static NFAModel create(NFAEdge entryEdge, NFAState tailState) {
-        return new NFAModel(entryEdge, tailState);
-    }
-
     public NFAEdge getEntryEdge() {
         return entryEdge;
     }
 
     public NFAState getTailState() {
         return tailState;
+    }
+
+    public Set<Character> getInputSet() {
+        final Queue<NFAState> stateQueue = new LinkedList<>();
+        final Set<NFAState> stateSet = new HashSet<>();
+        final Set<Character> characterSet = new HashSet<>();
+        characterSet.add(entryEdge.getCharacter());
+        stateQueue.add(entryEdge.getState());
+        stateSet.add(entryEdge.getState());
+
+        while (!stateQueue.isEmpty()) {
+            final NFAState state = stateQueue.poll();
+            for (NFAEdge outEdge : state.getOutEdges()) {
+                characterSet.add(outEdge.getCharacter());
+                if (!stateSet.contains(outEdge.getState())) {
+                    stateQueue.add(outEdge.getState());
+                    stateSet.add(outEdge.getState());
+                }
+            }
+        }
+        return characterSet;
     }
 
     @Override
@@ -55,5 +78,9 @@ public class NFAModel {
             }
         }
         return JSON.toJSONString(nfaTable);
+    }
+
+    public static NFAModel create(NFAEdge entryEdge, NFAState tailState) {
+        return new NFAModel(entryEdge, tailState);
     }
 }

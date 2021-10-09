@@ -1,6 +1,10 @@
 package com.mairuis.pl;
 
 /**
+ * 级联操作
+ * 表达式：(a U b)*
+ * 例子：abababba abab aaa bbb
+ *
  * @author Mairuis
  * @since 2021/8/30
  */

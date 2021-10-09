@@ -35,11 +35,6 @@ public class NFAConverter implements RegularExpressionConverter<NFAModel> {
     }
 
     @Override
-    public NFAModel convertLiteral(LiteralExpression literalExpression) {
-        return null;
-    }
-
-    @Override
     public NFAModel convertSymbol(SymbolExpression symbolExpression) {
         final char character = symbolExpression.getCharacter();
         final NFAState entryState = NFAState.create();
@@ -51,6 +46,13 @@ public class NFAConverter implements RegularExpressionConverter<NFAModel> {
 
     @Override
     public NFAModel convertUnion(UnionExpression unionExpression) {
-        return null;
+        NFAState leftState = NFAState.create();
+        final NFAEdge entryEdge = NFAEdge.create(Symbols.EMPTY, leftState);
+        for (RegularExpression expression : unionExpression.getExpressions()) {
+            final NFAModel nfaModel = convert(expression);
+            leftState.addEdge(nfaModel.getEntryEdge());
+            leftState = nfaModel.getTailState();
+        }
+        return new NFAModel(entryEdge, leftState);
     }
 }
