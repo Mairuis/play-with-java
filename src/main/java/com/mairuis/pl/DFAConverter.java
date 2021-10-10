@@ -19,9 +19,12 @@ public class DFAConverter {
         while (!stateQueue.isEmpty()) {
             final NFASet nfaSet = stateQueue.poll();
             for (Character character : nfaModel.getInputSet()) {
+                if (character == Symbols.EMPTY) {
+                    continue;
+                }
                 final NFASet nextSet = epsilonClosure(reachable(nfaSet, character));
+                dfaTable.computeIfAbsent(nfaSet, (k) -> new HashMap<>()).put(character, nextSet);
                 if (!nfaSets.contains(nextSet)) {
-                    dfaTable.computeIfAbsent(nfaSet, (k) -> new HashMap<>()).put(character, nextSet);
                     stateQueue.add(nextSet);
                     nfaSets.add(nextSet);
                 }

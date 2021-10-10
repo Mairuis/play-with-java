@@ -6,6 +6,6 @@ package com.mairuis.pl;
  */
 public interface Symbols {
 
-    char EMPTY = 0;
+    char EMPTY = 'E';
 
 }

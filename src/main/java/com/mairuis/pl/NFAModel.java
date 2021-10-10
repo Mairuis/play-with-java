@@ -57,23 +57,19 @@ public class NFAModel {
 
     @Override
     public String toString() {
-        final AtomicInteger id = new AtomicInteger();
-        final Map<NFAState, Integer> codeMap = new HashMap<>();
         final Queue<NFAState> states = new LinkedList<>();
         final Set<Integer> rememberState = new HashSet<>();
         final Map<Integer, Map<Character, Set<Integer>>> nfaTable = new HashMap<>();
         states.add(entryEdge.getState());
         while (!states.isEmpty()) {
             final NFAState state = states.poll();
-            final Integer stateId = codeMap.computeIfAbsent(state, (nfaState) -> id.incrementAndGet());
             for (final NFAEdge edge : state.getOutEdges()) {
                 final NFAState toState = edge.getState();
-                final Integer toStateId = codeMap.computeIfAbsent(toState, (nfaState) -> id.incrementAndGet());
-                nfaTable.computeIfAbsent(stateId, (k) -> new HashMap<>()).computeIfAbsent(edge.getCharacter(), (k) -> new HashSet<>()).add(toStateId);
+                nfaTable.computeIfAbsent(state.getId(), (k) -> new HashMap<>()).computeIfAbsent(edge.getCharacter(), (k) -> new HashSet<>()).add(toState.getId());
 
-                if (!rememberState.contains(toStateId)) {
+                if (!rememberState.contains(toState.getId())) {
                     states.add(toState);
-                    rememberState.add(toStateId);
+                    rememberState.add(toState.getId());
                 }
             }
         }

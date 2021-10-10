@@ -14,18 +14,6 @@ public final class RegExp {
         return new ConcatenationExpression(left, right);
     }
 
-    public static RegularExpression concatenation(RegularExpression... expressions) {
-        RegularExpression expression = null;
-        for (RegularExpression element : expressions) {
-            if (expression == null) {
-                expression = element;
-            } else {
-                expression = new ConcatenationExpression(expression, element);
-            }
-        }
-        return expression;
-    }
-
     public static RegularExpression union(RegularExpression... expressions) {
         return new UnionExpression(expressions);
     }
@@ -39,7 +27,6 @@ public final class RegExp {
         final NFAConverter nfaConverter = new NFAConverter();
         final NFAModel model = nfaConverter.convert(expression);
         final DFAModel dfaModel = DFAConverter.convert(model);
-
-        System.out.println(model.toString());
+        System.out.println(dfaModel);
     }
 }

@@ -29,8 +29,8 @@ public class NFAConverter implements RegularExpressionConverter<NFAModel> {
         final NFAEdge entryEdge = NFAEdge.create(Symbols.EMPTY, entryState);
         entryState.addEdge(innerNfaModel.getEntryEdge());
         entryState.addEdge(NFAEdge.create(Symbols.EMPTY, tailState));
-        tailState.addEdge(NFAEdge.create(Symbols.EMPTY, entryState));
         innerTailState.addEdge(NFAEdge.create(Symbols.EMPTY, tailState));
+        innerTailState.addEdge(NFAEdge.create(Symbols.EMPTY, entryState));
         return NFAModel.create(entryEdge, tailState);
     }
 
