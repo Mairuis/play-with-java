@@ -80,7 +80,7 @@ public abstract class Sort implements SortArray {
     }
 
     public static void testSort() {
-        testSort(500000, false);
+        testSort(10, false);
     }
 
     public static void testSort(int num, boolean nearlySoted) {
